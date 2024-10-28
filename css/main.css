@@ -44,6 +44,13 @@ p {
   padding: 0 20px;
   position: relative;
 }
+  /*  Inner  */
+  .inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
+    max-width: 980px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+  }
   
 /*  Btn */
 .btn { /*nav영역 작성하면서 버튼 생성*/
