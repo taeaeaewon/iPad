@@ -23,7 +23,6 @@ img {
 p {
   line-height: 1.6;
 } 
-
   /*  Inner  */
   .inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
     max-width: 980px; 
