@@ -1,0 +1,459 @@
+html.fixed { /*검색 눌렀을때 스크롤바 고정시키게 하기 위해서 검색js 만들고 나중에 작성*/
+  position: fixed;
+  overflow-y: scroll;
+  width: 100%;
+}
+body { /*폰트를 쓰겠다, 왼쪽부터 적용하고 안되는건 오른쪽 순차적으로 적용한다*/
+  font-size: 16px;
+  line-height: 1;
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+  word-break: keep-all; /*줄바꿈할때 단어 깨지지 않고 붙여서 줄바꿈 가능*/
+  color: #1D1D1D; /*항상 파란색이어서 자동 완성역역 만들면서 뒤늦게 설정*/
+  height: 10000px;
+}
+a {
+  text-decoration: none; /*항상 a태그에 밑줄이 나와서 장바구니 만들면서 뒤늦게 설정*/
+  color: #1D1D1D; /*항상 파란색이어서 자동 완성역역 만들면서 뒤늦게 설정*/
+}
+img {
+  display: block;
+  user-select: none; /*드래그로 선택시 포함 안되도록*/
+  -webkit-user-drag: none; /*이미지 드래그 못하도록*/
+}
+p {
+  line-height: 1.6;
+} 
+
+  /*  Inner  */
+  .inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
+    max-width: 980px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+  }
+  
+/*  Btn */
+.btn { /*nav영역 작성하면서 버튼 생성*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 100px;
+  outline: none;
+  font-size: 11px;
+  line-height: 1; 
+  color: #FFF;
+  background-color: #0071E3;
+  cursor: pointer;
+}
+.btn:hover {
+  opacity: .7;
+}
+.btn:focus {
+  box-shadow: 0 0 0 4px #81B9F1; /*x y blur spread color*/
+}
+
+/*  Background image text */
+.bgtext { /*텍스트 대신 이미지 삽입하는데 나중에도 사용할거라 nav작성하면서 작성*/
+  display: block;
+  text-indent: -9999px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; /*더 짧은 너비의 이미지를 맞추는거, 범위 안에서 이미지 잘리지 않도록*/
+}
+
+/*  Links  */
+.links { /*nav 밑 버튼 작성할때 작성*/
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+a.link {
+  color: #0071E3;
+  font-size: 19px;
+  line-height: 1.3;
+}
+a.link:hover {
+  text-decoration: underline;
+}
+a.link::after {
+  content: " >";
+}
+
+/*  Figures */
+.figures {
+  position: relative;
+}
+.figures figure,
+.figures figcaption {
+  position: absolute; /*부모 요소 기준 왼쪽 상단에서 시작!*/ /*이게 없으면 html구조가 바뀔때마다 수정을 다시 해줘야함, 따라서 고정시키는 값이라 생각하면 됨*/
+  top: 0;
+  left: 0;
+}
+.figures figcaption * {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+/*  Header */
+header {
+  background-color: #3A3A3A;
+  z-index: 9; /*position:static이 아니어야만 함*/
+  position: relative; /*position 기본값은 static이기때문에 무난한걸로 바꿈*/
+}
+header .inner {
+  max-width: 1020px; /*1020이하면 자동으로 맞춰질 수 있게*/
+  /*margin: 0 auto;*/ /*좌우여백은 브라우저가 자동으로 계산해서 가운데 정렬*/ /*nav작성하며 위에 inner 공통부분 작성했기때문에 삭제*/
+  /*position:relative;*/ /*자식요소인 header .search-wrap 때문에 나중에 작성함*/ /*nav작성하며 위에 inner 공통부분 작성했기때문에 삭제*/
+}
+header ul.menu {
+  display: flex;
+  height: 44px;
+  justify-content: space-between;
+}
+header ul.menu > li {
+  display: flex;
+  position: relative;
+  transition: .4s; /*검색 사라지는 js 만들면서 추가*/
+}
+header ul.menu > li > a { /*flex가 .menu, li, a에 있어서 글씨가 센터에 위치할 수 있음 */
+  padding: 0 10px;
+  font-size: 11px;
+  display: flex;  
+  align-items: center;
+  color: #F5F5F5;
+  opacity: .8;  
+  text-decoration: none; /*원래 링크지만 여기선 안해서 밑줄 없애기*/
+}
+header ul.menu > li.apple-logo > a,
+header ul.menu > li.search-starter > a,
+header ul.menu > li.basket-starter > a {
+  width: 14px;
+  text-indent: -9999px; /*글씨 안보이고 이미지로 대체 -9999는 무언의 약속*/
+  background-repeat: no-repeat;
+  background-position: center 13px; /*아이콘 크기가 살짝 밀려서 13px는 시각적으로 가운데 정렬로 보이려고*/
+}
+header ul.menu > li.apple-logo > a {
+  background-image: url(../images/header_apple.svg);
+}
+header ul.menu > li.search-starter > a {
+  background-image: url(../images/header_search.svg);
+}
+header ul.menu > li.basket-starter > a {
+  background-image: url(../images/header_bag.svg);
+}
+header ul.menu > li > a:hover {
+  opacity: 1;
+}
+
+/*  Header / Menu / Basket  */
+header .basket { 
+  width: 290px;
+  padding: 10px 20px;
+  border: 1px solid #D2D2D2;
+  border-radius: 10px;
+  box-sizing: border-box; /*가로는 290으로 고정, padding값 더해지는거 X*/
+  background-color: #FFF;
+  position: absolute; /*포지션 작성함으로서 부모요소 22번(header ul.menu > li)에 relative 작성해줘야함*/
+  top: calc(100% + 4px); /*단위가 달라서 calc함수 사용*/
+  right: -6px;
+  /*display: none;*/ /*장바구니 js 작성하고 작성, 처음엔 보이지 않아야해서*/
+  visibility: hidden; /*애니메이션 효과 위해서 display보다 visibility*/
+  transition: .4s; /*전환효과*/
+  opacity: 0;
+}
+header .basket.show { /*장바구니 js 작성하고, 눌렀을때 보이게*/ /*basket과show 띄어쓰기X show는 html에서 언급X js에서 생성*/
+  /*display: block;*/ /*display는 애니메이션 효과를 내지 못하기 때문에 삭제*/
+  visibility: visible;
+  opacity: 1;
+}
+header .basket .arrow { /*박스 오른쪽위에 조그마한 삼각형 표시*/
+  width: 20px;
+  height: 10px;
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  overflow: hidden; /*넘치는 부분(박스랑 겹치는 부분)은 가리기*/
+}
+header .basket .arrow::before {
+  content: ""; /*::before속성의 필수 요소*/
+  width: 12px;
+  height: 12px;
+  border: 1px solid #D2D2D2;
+  background-color: #FFF;
+  transform: rotate(45deg);
+  transform-origin: 0 0; /*변환의 기준점 = 왼쪽 상단, x축 y축*/
+  position: absolute;
+  top: 0;
+  left: 50%;
+}
+header .basket .message {
+  padding: 30px 0;
+  font-size: 13px;
+  color: #6E6E6E;
+  text-align: center;
+}
+header .basket ul {
+  margin-top: 10px;
+}
+header .basket ul li { 
+  border-top: 1px solid #D2D2D2;
+}
+header .basket ul li a { 
+  padding: 14px;
+  display: block; /*a=인라인요소, 위아래의 내부 여백은 제대로 적용 안되서 사용*/
+  font-size: 13px;
+  color: #0071E3;
+}
+header .basket ul li a:hover { 
+  text-decoration: underline;
+}
+
+/*  Header / Search  */
+header .search-wrap { /*맨 위 겁은색 줄*/
+  position: absolute; /*작성함으로서 상위부모요소인 header .inner에 position:relative 작성해야함 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  /*display: none;*/ /*검색 js 만들고 나서 나중에 작성*/ /*하지만 연관 검색 애니메이션 효과 주려고 삭제*/
+  visibility: hidden;
+  opacity: 0;
+  transition: .4s;
+}
+header .search { /*검색 눌렀을때 나오는 흰 부분 + 위에 검은배경의 검색창 */
+  max-width: 680px;
+  margin: 0 auto; /*가로 680안에서 가운데 정렬*/
+  position: relative; /*.autocompletes에 의해서 나중에 작성됨*/
+}
+header .search .shadow {
+  position: fixed; /*브라우저 뷰포트 기준*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .4);
+}
+header .search .textfield {
+  position: relative; /*.search-icon에 position때문에 작성함*/
+}
+header .search input {
+  width: 100%;
+  height: 44px;
+  padding: 0 40px;
+  border: none;
+  outline: none;
+  box-sizing: border-box; /*padding들어간만큼 커지지 않게 하려고*/
+  background-color: transparent; /*색을 투명하게*/
+  font-size: 17px;
+  color: #FFF;
+}
+header .search .search-icon {
+  width: 40px;
+  height: 44px;
+  background-image: url("../images/header_search.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute; /*여기를 작성함으로서 .textfield에 position:relative 작성함*/
+  top: 0;
+  left: 0; /*좌측 상단에 위치*/
+  opacity: .4;
+}
+header .search .search-closer {
+  width: 40px;
+  height: 44px;
+  background-image: url("../images/header_close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute; /*여기를 작성함으로서 .textfield에 position:relative 작성함*/
+  top: 0;
+  right: 0; /*우측 상단에 위치*/
+  opacity: .4;
+  cursor: pointer;
+}
+header .search .search-closer:hover {
+  opacity: 1;
+}
+header .search .autocompletes { /*자동완성 영역*/
+  width: 100%;
+  padding: 26px 40px 20px;
+  border-radius: 0 0 18px 18px;
+  box-sizing: border-box; /*padding이 있으니 박스 크기가 100%이상 커지지 않게 하려고*/
+  background-color: #FFF;
+  position: absolute; /*부모 요소 기준으로 배치*/ /*부모 요소인 .search에 relative 작성할것*/
+  top: 44px;
+  left: 0;
+}
+header .search .autocompletes h3 {
+  font-size: 12px;
+  color: #6E6E6E;
+  margin-bottom: 12px; /*--강의는 bottom 실제 사이트는 top--------*/
+}
+/*
+header .search .autocompletes ul {
+
+}
+header .search .autocompletes ul li {
+
+}
+*/
+header .search .autocompletes ul li a {
+  display: block; /*a는 기본적 인라인 요소, 좌우로 최대한 늘어날 수 있게 하려고*/
+  margin: 0 -14px;
+  padding: 10px 0 10px 30px;
+  font-size: 14px;
+  cursor: pointer;
+}
+header .search .autocompletes ul li:hover a {
+  background-color: #F5F5F5;
+  color: #0071E3;
+}
+
+header .search input,
+header .search .search-icon, 
+header .search .autocompletes h3,
+header .search .autocompletes li {
+  transition: .6s;
+  transform: translate(100px, 0);
+}
+
+header.searching ul.menu > li { /*검색 js 작성하고, 눌렀을때 보이게*/ /*header와searching 띄어쓰기X searching은 html에서 언급X js에서 생성*/
+  /* display: none; */ /*애니메이션 효과 집어넣으려고 삭제*/
+  opacity: 0;
+  transform: scale(.7);/*70%정도로 작아지게 하는 효과*/
+  /* transition-delay */ /*개별적 보단 js로 한번에하려고*/
+}
+header.searching .search-wrap { /*검색 js 작성하고, 눌렀을때 보이게*/ /*header와searching 띄어쓰기X searching은 html에서 언급X js에서 생성*/
+  /*display: block;*/ /*애니메이션 효과를 위해서 */
+  visibility: visible; /*애니메이션 효과를 위해서 */
+  opacity: 1;
+  transition-delay: .2s;
+}
+
+header.searching .search input,
+header.searching .search .search-icon, 
+header.searching .search .autocompletes h3,
+header.searching .search .autocompletes li {
+  transition-delay: .2s;
+  transform: translate(0, 0);
+}
+
+
+/*  Navigation  */
+
+nav {
+  background-color: rgba(255, 255, 255, .7); 
+  backdrop-filter: blur(20px); /*뿌옇게 하기*/
+  border-bottom: 1px solid #D2D2D2;
+  position: sticky; /*달랍붙게*/ /*사용하려면 top,bottom,left,right중 하나이상과 같이 써야함*/
+  top: 0; /*탑 지점 0에서 달라붙게*/
+  z-index: 8; /*항상 위에 있으려고*/
+}
+nav .inner {
+  max-width: 1000px;
+  /*margin: 0 auto;*/ /*nav작성하며 위에 inner 공통부분 작성했기때문에 삭제*/
+  height: 52px;
+  display: flex;
+  align-items: center; /*교차축 정렬*/
+}
+nav h1 {
+  font-size: 22px;
+  font-weight: 500;
+  flex-grow: 1;
+}
+nav .menu {
+  display: flex;
+  gap: 12px; /*사이 간격*/
+  margin-right: 18px;
+}
+/*
+nav .menu li {
+
+}
+*/
+nav .menu li a {
+  display: block; /*a는 인라인요소니 margin,padding은 사용못하니까 block처리*/
+  padding: 6px;
+  font-size: 11px;
+}
+nav .menu li:hover a {
+  color: #0071E3;
+}
+nav .menu li.active a {
+  opacity: .5;
+  cursor: default;
+}
+nav .menu li.active:hover a {
+  color: #1D1D1D;
+}
+
+
+/*  Hero  */
+.hero {
+  background-color: #F5F5F5;
+}
+.hero .inner {
+  padding-bottom: 110px;
+}
+.hero h1 { 
+  background-image: url("../images/hero_ipad_text.png");
+  width: 221px;
+  height: 91px;
+  position: absolute;
+  transform: translate(624px, 235px);
+  z-index: 1;
+}
+.hero .figures { /*나중에 추가한거*/
+  height: 808px;
+}
+.hero figure {
+  transform: translate(74px, -64px); /*이동 함수*/
+}
+/*.hero figure img {
+
+}
+.hero figure figcaption {
+
+}*/
+.hero figure figcaption .caption-camera {
+  transform: translate(43px, 580px);
+  background-image: url("../images/hero_ipad_caption_camera.png");
+  width: 120px;
+  height: 84px;
+}
+.hero figure figcaption .caption-chip {
+  transform: translate(589px, 510px);
+  background-image: url("../images/hero_ipad_caption_chip.png");
+  width: 95px;
+  height: 43px;
+}
+.hero figure figcaption .caption-storage {
+  transform: translate(627px, 631px);
+  background-image: url("../images/hero_ipad_caption_storage.png");
+  width: 80px;
+  height: 43px;
+}
+.hero h2 {
+  background-image: url("../images/hero_headline.png");
+  width: 738px;
+  height: 145px;
+  margin: 0 auto; /*가운데 정렬 원할때(but 가로 너비가 있을때)*/
+}
+.hero p.pricing {
+  margin-top: 40px;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+.hero p.description {
+  width: 88%; /*br태그 써도 괜찮았다. 글자가 깔끔하게 보이게 하려고*/
+  margin: 18px auto 0;
+  font-size: 19px;
+  text-align: center;
+}
+.hero .links {
+  margin-top: 30px;
+}
