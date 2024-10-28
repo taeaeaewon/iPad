@@ -1,3 +1,17 @@
+html { /*변수 지정*/
+  --color-white: #FFF;
+  --color-black: #000;
+  --color-font: #1D1D1D;
+  --color-font-darkgray: #6E6E6E;
+  --color-font-lightgray: #F5F5F5;
+  --color-link: #0071E3;
+  --color-link-focus: #81B9F1;
+  --color-border: #D2D2D2;
+  --color-header: #3A3A3A;
+  --color-section: #F5F5F5;
+  --color-shadow: rgba(0, 0, 0, .4);
+}
+
 html.fixed { /*검색 눌렀을때 스크롤바 고정시키게 하기 위해서 검색js 만들고 나중에 작성*/
   position: fixed;
   overflow-y: scroll;
@@ -8,12 +22,12 @@ body { /*폰트를 쓰겠다, 왼쪽부터 적용하고 안되는건 오른쪽 �
   line-height: 1;
   font-family: "Roboto", "Noto Sans KR", sans-serif;
   word-break: keep-all; /*줄바꿈할때 단어 깨지지 않고 붙여서 줄바꿈 가능*/
-  color: #1D1D1D; /*항상 파란색이어서 자동 완성역역 만들면서 뒤늦게 설정*/
+  color: var(--color-font); /*항상 파란색이어서 자동 완성영역 만들면서 뒤늦게 설정*/ /*변수로 설정*/
   height: 10000px;
 }
 a {
   text-decoration: none; /*항상 a태그에 밑줄이 나와서 장바구니 만들면서 뒤늦게 설정*/
-  color: #1D1D1D; /*항상 파란색이어서 자동 완성역역 만들면서 뒤늦게 설정*/
+  color: var(--color-font); /*항상 파란색이어서 자동 완성역역 만들면서 뒤늦게 설정*/ /*변수로 설정*/
 }
 img {
   display: block;
@@ -23,13 +37,13 @@ img {
 p {
   line-height: 1.6;
 } 
-  /*  Inner  */
-  .inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
-    max-width: 980px; 
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-  }
+/*  Inner  */
+.inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
+  max-width: 980px; 
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
   
 /*  Btn */
 .btn { /*nav영역 작성하면서 버튼 생성*/
@@ -43,15 +57,15 @@ p {
   outline: none;
   font-size: 11px;
   line-height: 1; 
-  color: #FFF;
-  background-color: #0071E3;
+  color: var(--color-white); /*변수로 설정*/
+  background-color: var(--color-link); /*변수로 설정*/
   cursor: pointer;
 }
 .btn:hover {
   opacity: .7;
 }
 .btn:focus {
-  box-shadow: 0 0 0 4px #81B9F1; /*x y blur spread color*/
+  box-shadow: 0 0 0 4px var(--color-link-focus); /*x y blur spread color*/ /*변수로 설정*/
 }
 
 /*  Background image text */
@@ -70,7 +84,7 @@ p {
   gap: 40px;
 }
 a.link {
-  color: #0071E3;
+  color: var(--color-link); /*변수로 설정*/
   font-size: 19px;
   line-height: 1.3;
 }
@@ -81,9 +95,15 @@ a.link::after {
   content: " >";
 }
 
+/*  Feature */
+.feature { /*figures와 infos 수평정렬하려고 (이미지 옆에 글 있는 부분들)*/
+  display: flex;
+}
+
 /*  Figures */
 .figures {
   position: relative;
+  flex-grow: 1; /*infos랑 같이 있을때 최대한 늘어나게 하려고*/
 }
 .figures figure,
 .figures figcaption {
@@ -97,12 +117,61 @@ a.link::after {
   left: 0;
 }
 
+/* Infos */
+.infos {
+  display: flex;
+  flex-direction: column; /*기본값:row 기본 수평이 주축인데 수직으로 바꿈*/
+  position: relative; /*밑에 있는 z-index 정상 작동위해서 같이 써야함*/
+  z-index: 1; /*글씨가 사진에 가려져서*/
+}
+.infos.infos--center {
+  justify-content: center;
+}
+.infos.infos--end {
+  justify-content: flex-end;
+}
+.info {
+  max-width: 339px;
+  margin-bottom: 24px;
+}
+.info .icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 0 -15px -30px;
+  /* background-image: url(../images/sprite_apps.png); */ /*스프라이트 이미지 적용전 임시 작성*/
+}
+.info .icon.icon--chip         { background-image: url("../images/sprite_chip.png"); }
+.info .icon.icon--faster       { background-image: url("../images/sprite_faster.png"); }
+.info .icon.icon--neural       { background-image: url("../images/sprite_neural.png"); }
+.info .icon.icon--apps         { background-image: url("../images/sprite_apps.png"); }
+.info .icon.icon--battery      { background-image: url("../images/sprite_battery.png"); }
+.info .icon.icon--display      { background-image: url("../images/sprite_display.png"); }
+.info .icon.icon--true-tone    { background-image: url("../images/sprite_true_tone.png"); }
+.info .icon.icon--center-stage { background-image: url("../images/sprite_center_stage.png"); }
+.info .icon.icon--front-camera { background-image: url("../images/sprite_front_camera.png"); }
+.info .icon.icon--back-camera  { background-image: url("../images/sprite_back_camera.png"); }
+.info .icon.icon--scan         { background-image: url("../images/sprite_scan.png"); }
+.info .icon.icon--download     { background-image: url("../images/sprite_download.png"); }
+.info .icon.icon--wifi         { background-image: url("../images/sprite_wifi.png"); }
+.info .icon.icon--lte          { background-image: url("../images/sprite_lte.png"); }
+.info .icon.icon--pencil       { background-image: url("../images/sprite_pencil.png"); }
+.info .icon.icon--keyboard     { background-image: url("../images/sprite_keyboard.png"); }
+.info .icon.icon--notes        { background-image: url("../images/sprite_notes.png"); }
+.info .icon.icon--covers       { background-image: url("../images/sprite_covers.png"); }
+
+.info p {
+  font-size: 21.5px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
 
 /*  Header */
 header {
-  background-color: #3A3A3A;
+  background-color: var(--color-header); /*변수로 설정*/
   z-index: 9; /*position:static이 아니어야만 함*/
   position: relative; /*position 기본값은 static이기때문에 무난한걸로 바꿈*/
+  --header-height: 44px; /*변수 지정*/
 }
 header .inner {
   max-width: 1020px; /*1020이하면 자동으로 맞춰질 수 있게*/
@@ -111,7 +180,7 @@ header .inner {
 }
 header ul.menu {
   display: flex;
-  height: 44px;
+  height: var(--header-height); /*변수로 설정*/
   justify-content: space-between;
 }
 header ul.menu > li {
@@ -124,7 +193,7 @@ header ul.menu > li > a { /*flex가 .menu, li, a에 있어서 글씨가 센터�
   font-size: 11px;
   display: flex;  
   align-items: center;
-  color: #F5F5F5;
+  color: var(--color-font-lightgray); /*변수로 설정*/
   opacity: .8;  
   text-decoration: none; /*원래 링크지만 여기선 안해서 밑줄 없애기*/
 }
@@ -153,10 +222,10 @@ header ul.menu > li > a:hover {
 header .basket { 
   width: 290px;
   padding: 10px 20px;
-  border: 1px solid #D2D2D2;
+  border: 1px solid var(--color-border); /*변수로 설정*/
   border-radius: 10px;
   box-sizing: border-box; /*가로는 290으로 고정, padding값 더해지는거 X*/
-  background-color: #FFF;
+  background-color: var(--color-white); /*변수로 설정*/
   position: absolute; /*포지션 작성함으로서 부모요소 22번(header ul.menu > li)에 relative 작성해줘야함*/
   top: calc(100% + 4px); /*단위가 달라서 calc함수 사용*/
   right: -6px;
@@ -182,8 +251,8 @@ header .basket .arrow::before {
   content: ""; /*::before속성의 필수 요소*/
   width: 12px;
   height: 12px;
-  border: 1px solid #D2D2D2;
-  background-color: #FFF;
+  border: 1px solid var(--color-border); /*변수로 설정*/
+  background-color: var(--color-white); /*변수로 설정*/
   transform: rotate(45deg);
   transform-origin: 0 0; /*변환의 기준점 = 왼쪽 상단, x축 y축*/
   position: absolute;
@@ -193,20 +262,20 @@ header .basket .arrow::before {
 header .basket .message {
   padding: 30px 0;
   font-size: 13px;
-  color: #6E6E6E;
+  color: var(--color-font-darkgray); /*변수로 설정*/
   text-align: center;
 }
 header .basket ul {
   margin-top: 10px;
 }
 header .basket ul li { 
-  border-top: 1px solid #D2D2D2;
+  border-top: 1px solid var(--color-border); /*변수로 설정*/
 }
 header .basket ul li a { 
   padding: 14px;
   display: block; /*a=인라인요소, 위아래의 내부 여백은 제대로 적용 안되서 사용*/
   font-size: 13px;
-  color: #0071E3;
+  color: var(--color-link); /*변수로 설정*/
 }
 header .basket ul li a:hover { 
   text-decoration: underline;
@@ -234,25 +303,25 @@ header .search .shadow {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .4);
+  background-color: var(--color-shadow); /*변수로 설정*/
 }
 header .search .textfield {
   position: relative; /*.search-icon에 position때문에 작성함*/
 }
 header .search input {
   width: 100%;
-  height: 44px;
+  height: var(--header-height); /*변수로 설정*/
   padding: 0 40px;
   border: none;
   outline: none;
   box-sizing: border-box; /*padding들어간만큼 커지지 않게 하려고*/
   background-color: transparent; /*색을 투명하게*/
   font-size: 17px;
-  color: #FFF;
+  color: var(--color-white); /*변수로 설정*/
 }
 header .search .search-icon {
   width: 40px;
-  height: 44px;
+  height: var(--header-height); /*변수로 설정*/
   background-image: url("../images/header_search.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -263,7 +332,7 @@ header .search .search-icon {
 }
 header .search .search-closer {
   width: 40px;
-  height: 44px;
+  height: var(--header-height); /*변수로 설정*/
   background-image: url("../images/header_close.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -281,14 +350,14 @@ header .search .autocompletes { /*자동완성 영역*/
   padding: 26px 40px 20px;
   border-radius: 0 0 18px 18px;
   box-sizing: border-box; /*padding이 있으니 박스 크기가 100%이상 커지지 않게 하려고*/
-  background-color: #FFF;
+  background-color: var(--color-white); /*변수로 설정*/
   position: absolute; /*부모 요소 기준으로 배치*/ /*부모 요소인 .search에 relative 작성할것*/
-  top: 44px;
+  top: var(--header-height); /*변수로 설정*/
   left: 0;
 }
 header .search .autocompletes h3 {
   font-size: 12px;
-  color: #6E6E6E;
+  color: var(--color-font-darkgray); /*변수로 설정*/
   margin-bottom: 12px; /*--강의는 bottom 실제 사이트는 top--------*/
 }
 /*
@@ -307,8 +376,8 @@ header .search .autocompletes ul li a {
   cursor: pointer;
 }
 header .search .autocompletes ul li:hover a {
-  background-color: #F5F5F5;
-  color: #0071E3;
+  background-color: var(--color-section); /*변수로 설정*/
+  color: var(--color-link); /*변수로 설정*/
 }
 
 header .search input,
@@ -346,7 +415,7 @@ header.searching .search .autocompletes li {
 nav {
   background-color: rgba(255, 255, 255, .7); 
   backdrop-filter: blur(20px); /*뿌옇게 하기*/
-  border-bottom: 1px solid #D2D2D2;
+  border-bottom: 1px solid var(--color-border); /*변수로 설정*/
   position: sticky; /*달랍붙게*/ /*사용하려면 top,bottom,left,right중 하나이상과 같이 써야함*/
   top: 0; /*탑 지점 0에서 달라붙게*/
   z-index: 8; /*항상 위에 있으려고*/
@@ -379,20 +448,20 @@ nav .menu li a {
   font-size: 11px;
 }
 nav .menu li:hover a {
-  color: #0071E3;
+  color: var(--color-link); /*변수로 설정*/
 }
 nav .menu li.active a {
   opacity: .5;
   cursor: default;
 }
 nav .menu li.active:hover a {
-  color: #1D1D1D;
+  color: var(--color-font); /*변수로 설정*/
 }
 
 
 /*  Hero  */
 .hero {
-  background-color: #F5F5F5;
+  background-color: var(--color-section); /*변수로 설정*/
 }
 .hero .inner {
   padding-bottom: 110px;
@@ -455,4 +524,63 @@ nav .menu li.active:hover a {
 }
 .hero .links {
   margin-top: 30px;
+}
+
+
+/* Power */
+.power {
+  margin-top: 110px;
+}
+/* .inner부분은 위에 공통부분에 작성했었음. 추가할게 없음.
+.power .inner {
+
+}
+*/
+/* Power / Multiple Apps */
+.power .multiple-apps h1 {
+  background-image: url(../images/power_headline.png);
+  width: 500px;
+  height: 280px;
+  transform: translate(104px, 0);
+}
+.power .multiple-apps .figures {
+  height: 773px;
+}
+.power .multiple-apps figcaption {
+  background-image: url(../images/power_multiple_apps_caption.png);
+  width: 138px;
+  height: 46px;
+  transform: translate(703px, -47px);
+}
+/* Power / Arcade */
+.power .arcade {
+  margin-top: 55px;
+}
+.power .arcade .figures {
+  height: 600px;
+}
+.power .arcade figure {
+  transform: translate(-347px, -90px);
+}
+.power .arcade figcaption {
+  width: 150px;
+  height: 77px;
+  background-image: url(../images/power_arcade_caption.png);
+  transform: translate(483px, 653px);
+}
+/* Power / Create */
+.power .create {
+  margin-top: 55px;
+}
+.power .create .figures {
+  height: 772px;
+}
+.power .create figure {
+  transform: translate(-25px, 50px);
+}
+.power .create figcaption {
+  width: 142px;
+  height: 46px;
+  background-image: url("../images/power_create_caption.png");
+  transform: translate(543px, 908px);
 }
