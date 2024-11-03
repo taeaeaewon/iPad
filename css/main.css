@@ -44,14 +44,6 @@ p {
   padding: 0 20px;
   position: relative;
 }
-  /*  Inner  */
-  .inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
-    max-width: 980px; 
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-  }
-  
 /*  Btn */
 .btn { /*nav영역 작성하면서 버튼 생성*/
   display: flex;
@@ -148,6 +140,9 @@ a.link::after {
   opacity: 1; /*글씨가 보이게 되면 불투명하게*/
   transform: translate(0, 0);
 }
+.infos--large .info {
+  max-width: 410px;
+}
 .info .icon {
   width: 100px;
   height: 100px;
@@ -179,7 +174,11 @@ a.link::after {
   font-weight: 600;
   line-height: 1.5;
 }
-
+.info a.link {
+  margin-top: 44px;
+  display: block; /*a는 인라인 요소니까 margin-top 사용하려면 display-block 필요*/
+  font-size: 19.5px;
+}
 
 /*  Header */
 header {
@@ -641,24 +640,158 @@ nav .menu li.active:hover a {
 
 /*  Camera */
 .camera {
-  
+  margin-top: 303px;
 }
-/*  Camera / Stage */
+/*  Camera / Stage */ 
+.camera .stage {
+  position: relative;
+}
 .camera .stage h1 {
-
+  background-image: url("../images/camera_headline.png");
+  width: 650px;
+  height: 450px;
+  transform: translate(-25px, 0);
 }
 .camera .stage .info {
-
+  position: absolute;
+  top: 150px;
+  right: 0;
 }
 .camera .stage .figures {
-
+  height: 770px;
+  margin-top: 24px;
 }
 .camera .stage figure {
-
+  transform: translate(90px, 0);
+}
+.camera .stage video {
+  position: absolute;
+  top: 36px;
+  left: 76px;
+  -webkit-mask-image: url("../images/camera_video_mask.png"); /*접두사, 브라우저 별로 다르니까*/
+  mask-image: url("../images/camera_video_mask.png"); /*동영상은 네모이지만 이미지는 기울어져서 맞추려고 마스크 이미지*/
+}
+.camera .stage .controller--play,
+.camera .stage .controller--pause {
+  color: var(--color-link);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translate(428px, -134px) rotate(-3deg); /*위치 조정후 기울어진 이미지 밑이라 각도 조정까지*/
+}
+.camera .stage .controller--play:hover,
+.camera .stage .controller--pause:hover {
+  text-decoration: underline;
+}
+.camera .stage .controller--play.hide,
+.camera .stage .controller--pause.hide {
+  display: none;
+}
+.camera .stage .controller--play img,
+.camera .stage .controller--pause img {
+  width: 20px;
+  margin-top: -2px;
 }
 .camera .stage figcaption {
-
+  background-image: url("../images/camera_hardware_caption.png");
+  width: 130px;
+  height: 110px;
+  transform: translate(-116px, 383px);
 }
+/*  Camera / edit */
+/*
+.edit {
+  transform: translate(600px, 0); /*------------------내가 임의로 설정------------------------------
+}*/
+.camera .edit .figures {
+  height: 910px;
+}
+.camera .edit figure {
+  transform: translate(20px, 0);
+}
+.camera .edit figcaption {
+  background-image: url("../images/camera_edit_caption.png");
+  width: 130px;
+  height: 47px;
+  transform: translate(27px, 905px);
+}
+
+/*  Wireless */
+.wireless {
+  margin-top: 202px;
+}
+/*  Wireless / Facetime  */
+.wireless .facetime h1 {
+  background-image: url(../images/wireless_headline.png);
+  width: 730px;
+  height: 330px;
+  transform: translate(104px, 0);
+}
+.wireless .facetime .figures {
+  height: 773px;
+}
+.wireless .facetime figure {
+  transform: translate(-68px, 0);
+}
+.wireless .facetime figcaption {
+  background-image: url("../images/wireless_facetime_caption.png");
+  width: 139px;
+  height: 46px;
+  transform: translate(843px, -49px);
+}
+/*  Wireless / Files */
+.wireless .files figure {
+  transform: translate(34px, -34px);
+}
+.wireless .files figcaption {
+  width: 127px;
+  height: 46px;
+  background-image: url("../images/wireless_files_caption.png");
+  transform: translate(96px, 639px);
+}
+/*  Accessories */
+.accessories {
+  margin-top: 195px;
+}
+.accessories h1 {
+  background-image: url("../images/accessories_headline.png");
+  width: 550px;
+  height: 343px;
+  margin: 0 auto;
+}
+.accessories .figures {
+  height: 1021px;
+  margin-top: 34px;
+}
+.accessories figure {
+  transform: translate(-24px, 0);
+}
+.accessories figcaption .caption-memo {
+  background-image: url("../images/accessories_caption_memo.png");
+  width: 169px;
+  height: 41px;
+  transform: translate(790px, -52px);
+}
+.accessories figcaption .caption-supports {
+  background-image: url("../images/accessories_caption_supports.png");
+  width: 200px;
+  height: 70px;
+  transform: translate(163px, 821px);
+}
+.accessories .infos { /*위에 .infos에 공통 설정한거 바꾸려고*/
+  flex-direction: row; /*수직으로 바꾸었던걸 기본 수평 row로 바꿈*/
+  flex-wrap: nowrap; /*수평하다가 자리 모자르면 다음 줄*/
+  
+  
+  
+  .infos 
+    display: flex;
+    flex-direction: column; /*기본값:row 기본 수평이 주축인데 수직으로 바꿈*/
+    position: relative; /*밑에 있는 z-index 정상 작동위해서 같이 써야함*/
+    z-index: 1; /*글씨가 사진에 가려져서*/
+}
+
 
 
 @keyframes sprite-icon {
