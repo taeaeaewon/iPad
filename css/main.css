@@ -11,7 +11,6 @@ html { /*변수 지정*/
   --color-section: #F5F5F5;
   --color-shadow: rgba(0, 0, 0, .4);
 }
-
 html.fixed { /*검색 눌렀을때 스크롤바 고정시키게 하기 위해서 검색js 만들고 나중에 작성*/
   position: fixed;
   overflow-y: scroll;
@@ -37,6 +36,7 @@ img {
 p {
   line-height: 1.6;
 } 
+
 /*  Inner  */
 .inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
   max-width: 980px; 
@@ -44,6 +44,7 @@ p {
   padding: 0 20px;
   position: relative;
 }
+
 /*  Btn */
 .btn { /*nav영역 작성하면서 버튼 생성*/
   display: flex;
@@ -70,7 +71,7 @@ p {
 /*  Background image text */
 .bgtext { /*텍스트 대신 이미지 삽입하는데 나중에도 사용할거라 nav작성하면서 작성*/
   display: block;
-  text-indent: -9999px;
+  text-indent: -9999px; /*글씨 한쪽으로 밀어버리고 이미지로 대체 -9999는 개발자들 무언의 약속*/
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain; /*더 짧은 너비의 이미지를 맞추는거, 범위 안에서 이미지 잘리지 않도록*/
@@ -195,7 +196,7 @@ header .inner {
 header ul.menu {
   display: flex;
   height: var(--header-height); /*변수로 설정*/
-  justify-content: space-between;
+  justify-content: space-between; /*주축에 따라 정렬*/
 }
 header ul.menu > li {
   display: flex;
@@ -215,7 +216,7 @@ header ul.menu > li.apple-logo > a,
 header ul.menu > li.search-starter > a,
 header ul.menu > li.basket-starter > a {
   width: 14px;
-  text-indent: -9999px; /*글씨 안보이고 이미지로 대체 -9999는 무언의 약속*/
+  text-indent: -9999px; /*글씨 안보이고 이미지로 대체 -9999는 개발자들 무언의 약속*/
   background-repeat: no-repeat;
   background-position: center 13px; /*아이콘 크기가 살짝 밀려서 13px는 시각적으로 가운데 정렬로 보이려고*/
 }
@@ -750,6 +751,7 @@ nav .menu li.active:hover a {
   background-image: url("../images/wireless_files_caption.png");
   transform: translate(96px, 639px);
 }
+
 /*  Accessories */
 .accessories {
   margin-top: 195px;
@@ -781,17 +783,184 @@ nav .menu li.active:hover a {
 }
 .accessories .infos { /*위에 .infos에 공통 설정한거 바꾸려고*/
   flex-direction: row; /*수직으로 바꾸었던걸 기본 수평 row로 바꿈*/
-  flex-wrap: nowrap; /*수평하다가 자리 모자르면 다음 줄*/
-  
-  
-  
-  .infos 
-    display: flex;
-    flex-direction: column; /*기본값:row 기본 수평이 주축인데 수직으로 바꿈*/
-    position: relative; /*밑에 있는 z-index 정상 작동위해서 같이 써야함*/
-    z-index: 1; /*글씨가 사진에 가려져서*/
+  flex-wrap: wrap; /*수평하다가 자리 모자르면 다음 줄*/
+  justify-content: space-around; /*주축에 대한 정렬, 균등하게 좌우로 나눠서*/
 }
 
+/*  iPadOs */
+.ipados {
+  margin-top: 212px;
+}
+.ipados h1 {
+  background-image: url("../images/ipados_headline.png");
+  width: 530px;
+  height: 400px;
+  margin: 0 auto;
+}
+.ipados .infos {
+  margin-top: 44px;
+  align-items: flex-end;
+}
+.ipados .figures {
+  height: 782px;
+  display: flex;
+}
+.ipados .figures > div {
+  flex-grow: 1; /*div 3개가 널찍하게 부분 차지하기*/
+  position: relative; /*하단에 figure들 position값이 공통스타일(항상 부모요소는 figures)
+  하지만 상위요소가 figures가 아닌 그 안에 div이라서, 그리고 없는 상태에서 추가하기 때문에 relative*/
+}
+.ipados .figure-split-view figure {
+  transform: translate(-205px, -312px);
+}
+.ipados .figure-split-view figcaption {
+  background-image: url("../images/ipados_split_view_caption.png");
+  width: 163px;
+  height: 53px;
+  transform: translate(200px, -38px);
+}
+.ipados .figure-widgets figure {
+  transform: translate(237px, 43px);
+}
+.ipados .figure-widgets figcaption {
+  background-image: url("../images/ipados_widgets_caption.png");
+  width: 161px;
+  height: 46px;
+  transform: translate(257px, 497px);
+}
+.ipados .figure-quick-note figure {
+  transform: translate(-625px, 232px);
+}
+.ipados .figure-quick-note figcaption {
+  background-image: url("../images/ipados_quick_note_caption.png");
+  width: 82px;
+  height: 97px;
+  transform: translate(511px, 470px);
+}
+
+/*  Apps */
+.apps {
+  margin-top: 368px;
+}
+.apps h1 {
+  background-image: url("../images/apps_headline.png");
+  width: 500px;
+  height: 264px;
+  transform: translate(17px, 0);
+}
+.apps .infos {
+  margin-top: 36px;
+  margin-left: 82px;
+}
+.apps .figures {
+  display: flex; /*내부의 자식요소들 수평 정렬 부터*/
+  height: 788px;
+}
+.apps .figures > div {
+  flex-grow: 1; 
+  position: relative; /*내부 피규어 태그들이 정상 작동할 수 있도록*/
+}
+.apps .figure-masterclass figure {
+  transform: translate(578px, -431px);
+}
+.apps .figure-masterclass figcaption  {
+  background-image: url(../images/apps_masterclass_caption.png);
+  width: 100px;
+  height: 25px;
+  transform: translate(26px, 690px);
+}
+.apps .figure-adobe figure {
+  transform: translate(-515px, 85px);
+
+}
+.apps .figure-adobe figcaption  {
+  background-image: url(../images/apps_adobe_caption.png);
+  width: 105px;
+  height: 24px;
+  transform: translate(544px, 514px);
+}
+.apps .figure-fantasian figure {
+  transform: translate(-103px, 318px);
+
+}
+.apps .figure-fantasian figcaption  {
+  background-image: url(../images/apps_fantasian_caption.png);
+  width: 74px;
+  height: 22px;
+  transform: translate(24px, 483px);
+}
+.apps .figure-books figure {
+  transform: translate(-133px, -150px);
+
+}
+.apps .figure-books figcaption  {
+  background-image: url(../images/apps_books_caption.png);
+  width: 50px;
+  height: 27px;
+  transform: translate(397px, 707px);
+}
+.apps .figure-goodnotes figure {
+  transform: translate(-93px, 68px);
+
+}
+.apps .figure-goodnotes figcaption  {
+  background-image: url(../images/apps_goodnotes_caption.png);
+  width: 99px;
+  height: 26px;
+  transform: translate(24px, 690px);
+}
+
+/*  Privacy */
+.privacy  {
+  margin-top: 238px;
+}
+.privacy h1 {
+  background-image: url("../images/privacy_headline.png");
+  width: 482px;
+  height: 237px;
+  margin-left: auto; /*왼쪽 외부 영역 채워지고 오른쪽으로 밀려나게*/
+  position: relative; /*z-index값을 사용하려고*/
+  z-index: 1; /*figure부분보다 위에 있으려고*/
+  transform: translate(57px, 0);
+}
+.privacy .infos {
+  margin-top:  38px;
+  align-items: flex-end; /*오른쪽 정렬*/
+  position: relative;
+  z-index: 1;
+}
+.privacy figure {
+  transform: translate(-215px, -500px);
+}
+.privacy figcaption .caption-apple-id {
+  background-image: url("../images/privacy_caption_apple_id.png");
+  width: 170px;
+  height: 26px;
+  transform: translate(195px, -13px);
+}
+.privacy figcaption .caption-touch-id { 
+  background-image: url("../images/privacy_caption_touch_id.png");
+  width: 150px;
+  height: 31px;
+  transform: translate(533px, 485px);
+}
+
+/*  Accessibility */
+.accessibility {
+  margin-top: 266px;
+  margin-bottom: 170px;
+}
+.accessibility h1 {
+  background-image: url("../images/accessibility_headline.png");
+  width: 384px;
+  height: 270px;
+}
+.accessibility .infos {
+  margin-top: 20px;
+}
+.accessibility figure {
+  transform: translate(470px, -620px);
+}
 
 
 @keyframes sprite-icon {
