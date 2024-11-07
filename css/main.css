@@ -41,6 +41,7 @@ sup {
   font-size: .7em; /*상속받은 글자의 비율, 70%로 조금 작게 표시, 어디로 들어갈지 모르기때문에*/
   vertical-align: top; /*글자 수직정렬 위쪽으로*/
 }
+
 /*  Inner  */
 .inner { /*nav부분 작성하다 inner부분은 공통적으로 사용할거라 작성*/
   max-width: 980px; 
@@ -506,6 +507,10 @@ nav .menu li.active:hover a {
   color: var(--color-font); /*변수로 설정*/
 }
 
+/* Main */ /*다 만들고나서 이미지들이커 가로축에 스크롤바가 있는거 없애려고 html에 main으로 묶고 css 작성*/
+main {
+  overflow-x: hidden; 
+}
 
 /*  Hero  */
 .hero {
@@ -1154,6 +1159,112 @@ footer .warning li {
   line-height: 1.5;
   color: var(--color-font-darkgray);
 }
+/* Footer / Breadcrumbs */
+footer .breadcrumbs {
+display: flex;
+align-items: center;
+gap: 30px;
+margin: 20px 0;
+}
+footer .breadcrumbs a {
+font-size: 12px;
+color: var(--color-font-darkgray);
+position: relative; /*a::after에 posion:absolute 추가하려고*/
+}
+footer .breadcrumbs a.apple-logo {
+background-image: url("../images/path_apple.svg");
+width: 16px;
+height: 16px;
+}
+footer .breadcrumbs a:hover {
+  text-decoration: underline;
+}
+footer .breadcrumbs a::after {
+  content: "";
+  background-image: url("../images/path_div.svg");
+  width: 8px;
+  height: 18px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -18px;
+  margin: auto;
+}
+footer .breadcrumbs a:last-child::after {
+  display: none;
+}
+/* Footer / Navigations */
+footer .navigations {
+  margin-bottom: 40px;
+  height: 344px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+footer .navigations .map {
+  margin-top: 24px;
+}
+footer .navigations .map:nth-child(6) {
+  padding-bottom: 100px;
+}
+footer .navigations .map h3 {
+  font-size: 12px;
+  font-weight: 600;
+}
+footer .navigations .map li {
+  margin-top: 12px;
+  font-size: 12px;
+}
+footer .navigations .map li a {
+  color: var(--color-font-darkgray)
+}
+footer .navigations .map li a:hover {
+  text-decoration: underline;
+}
+/* Footer / How-to-shop */
+footer .how-to-shop {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-font-darkgray);
+}
+footer .how-to-shop a {
+  color: var(--color-link);
+}
+footer .how-to-shop a:hover {
+  text-decoration: underline;
+}
+footer .legal {
+  margin-top: 10px;
+  padding: 10px 0 40px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: 50px;
+  font-size: 12px;
+  color: var(--color-font-darkgray);
+}
+footer .legal ul {
+  display: flex;
+  gap: 21px;
+  flex-grow: 1; /*대한민국 글자를 오른쪽 끝으로 밀어내려고*/
+}
+footer .legal ul li {
+  position: relative;
+}
+footer .legal ul li::after {
+  content: "|";
+  position: absolute;
+  right: -11px;
+  color: var(--color-border);
+}
+footer .legal ul li:last-child::after {
+  display: none;
+}
+
+footer .legal ul li:hover a {
+  text-decoration: underline;
+}
+
 
 @keyframes sprite-icon {
   /* 1~10 */
